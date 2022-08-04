@@ -2,19 +2,21 @@ import React from "react";
 import {Text, View, StyleSheet} from 'react-native';
 
 import Login from "./src/telas/Login";
+import Cadastro from "./src/telas/Cadastro";
 
 const App = ()=>{
 
   const nome = "SENAI - Jandira";
 
   return(
-    <View>
-      <Login style={estilo.titulo}></Login>
-    </View>
+    // <View>
+    //   <Login style={estilo.titulo}></Login>
+    // </View>
 
     // <View>
     //   <Text style={estilo.titulo}>{nome}</Text>
     // </View>
+    <View><Cadastro/></View>
   );
 }
 
