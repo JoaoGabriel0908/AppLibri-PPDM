@@ -1,3 +1,4 @@
+// O APP representa o ponto inicial da nossa aplicação
 import React from "react";
 import {Text, View, StyleSheet} from 'react-native';
 
@@ -6,7 +7,7 @@ import Cadastro from "./src/telas/Cadastro";
 
 const App = ()=>{
 
-  const nome = "SENAI - Jandira";
+  // const nome = "SENAI - Jandira"
 
   return(
     // <View>

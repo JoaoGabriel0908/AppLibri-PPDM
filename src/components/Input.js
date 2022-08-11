@@ -4,14 +4,14 @@ import {View, Text, TextInput, StyleSheet} from 'react-native'
 import COLORS from "../const/Colors";
 
 // Função que representa um componente
-const Input = ({label}) => {
+const Input = ({label, ...props}) => {
     return(
         
         <View style={estilos.formContainer}>
             <Text style={estilos.inputLabel}>{label}</Text>
-
+            
             <View style={estilos.inputContainer}>
-                <TextInput style={estilos.TextInput} autoCorrect={false}/>
+                <TextInput style={estilos.TextInput} autoCorrect={false} {...props}/>
             </View>
         </View>
     );

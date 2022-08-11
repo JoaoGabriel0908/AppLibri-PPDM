@@ -3,9 +3,9 @@ import {TouchableOpacity, StyleSheet, Text} from 'react-native'
 
 import COLORS from "../const/Colors";
 
-const Button = ({title}) => {
+const Button = ({title, onPress=(() => {})}) => {
     return(
-        <TouchableOpacity activeOpacity={0.7} style={estilos.button}>
+        <TouchableOpacity activeOpacity={0.7} style={estilos.button} onPress={onPress}>
             <Text style={estilos.title}>{title}</Text>
         </TouchableOpacity>
     );
@@ -25,6 +25,7 @@ const estilos = StyleSheet.create({
         alignItems: "center",
         marginVertical: 20,
         borderWidth: .5,
+        borderRadius: 10,
     },
 });
 
