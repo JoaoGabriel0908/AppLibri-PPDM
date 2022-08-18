@@ -1,98 +1,136 @@
-import React from "react";
+import React from 'react';
 import {Text, View, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
-import Input from "../components/Input";
-import COLORS from "../const/Colors";
-import Button from "../components/Button";
+import Input from '../components/Input';
+import Button from '../components/Button';
+import COLORS from '../const/Colors';
 
-const Cadastro = ()=>{
+const Cadastro = () => {
+  // const nome = "Tela de Cadastro";
 
-    // const nome = "Tela de Cadastro";
+  //CAPTURA DE DADOS COM USO DE STATES
+  //CRIAÇÃO DE ESTRUTURA DE STATE QUE ARMAZENA OS CONTEÚDOS DIGITADOS
+  const [inputs, setInputs] = React.useState({
+    // O useState sempre representa essa estrutura
+    // Chave = inputs / valor = inputs
+    titulo: '',
+    descricao: '',
+    capa: '',
+  });
 
-    //CAPTURA DE DADOS COM USO DE STATES
-    //CRIAÇÃO DE ESTRUTURA DE STATE QUE ARMAZENA OS CONTEÚDOS DIGITADOS
-    const [inputs, setInputs] = React.useState({
-      // O useState sempre representa essa estrutura
-      // Chave = inputs / valor = inputs
-      titulo: '',
-      descricao: '',
-      capa: '',
-    })
-
-    // FUNÇÃO QUE MANIPULA A ENTRADA DE DADOS NA 
-    // STATE NO MÉTODO OnChangeText
-    const handleOnChange = (text, input) => {
-      //O setInputs invoca o estado e passa para o prevState
-        setInputs((prevState) => (
-          console.log(prevState),
+  // FUNÇÃO QUE MANIPULA A ENTRADA DE DADOS NA
+  // STATE NO MÉTODO OnChangeText
+  const handleOnChange = (text, input) => {
+    //O setInputs invoca o estado e passa para o prevState
+    setInputs(
+      prevState => (
+        console.log(prevState),
         // console.log(input + ` ` + text)
 
         // Injeção de dados na State
-        {...prevState, [input]:text}
-      ));
-    }
-
-    // Validação dos dados de cadastro
-    // Função de validação
-    const validate = () => {
-      let validate = true;
-
-      if(!inputs.titulo) {
-        validate = false;
-        console.log('Título em branco')
-      }
-      if(!inputs.descricao) {
-        validate = false;
-        console.log('Descrição em branco')
-      }
-      if(!inputs.capa) {
-        validate = false;
-        console.log('Capa em branco')
-      }
-    }
-
-    return(
-      // SafeAreaView, uma div que colocaria os elementos dentro dele
-      <SafeAreaView style={estilos.safe}>
-        <ScrollView style={estilos.scroll}>
-
-        <Text style={estilos.textTitle}>Cadastro de Livro</Text>  
-    
-          <View style={estilos.viewForm}>
-
-            {/* Componente que criamos */}
-
-            {/*Os dados são passados para o onChange, que passa para a variavel 'TEXT'*/}
-            <Input label="Título" onChangeText={(text) => handleOnChange(text, 'titulo')}/>
-            <Input label="Descrição" onChangeText={(text) => handleOnChange(text, 'descricao')}/>
-            <Input label="Capa" onChangeText={(text) => handleOnChange(text, 'capa')}/>
-
-            <Button title="Cadastrar"
-            onPress={validate}/>
-
-          </View>
-
-        </ScrollView>
-      </SafeAreaView>
+        // Sobrepondo resultado do texto e colocando no prevState
+        {...prevState, [input]: text}
+      ),
     );
-  }
+  };
+  // ******************** Validação dos dados de cadastro ********************
+
+  // State de erro de preenchimento
+  const [errors, setErrors] = React.useState([]);
+
+  // Função Handler que configura as mensagens de erros na state
+  // Pegando as mensagens de erros e onde ocorreu (input)
+  const handleErrors = (errorMessage, input) => {
+    // Quando usamos um par de parenteses quer dizer que estamos dando um RETURN
+    setErrors(prevState => ({
+      ...prevState,
+      [input]: errorMessage,
+    }));
+  };
+
+  // Função de validação
+  const validate = () => {
+    let validate = true;
+
+    // Quando máo tem conteúdo o validate ficará falso e aparecerá a mensagem
+    if (!inputs.titulo) {
+      validate = false;
+      handleErrors('Informe o título do livro', 'titulo');
+      // console.log('Título em branco')
+    }
+    if (!inputs.descricao) {
+      validate = false;
+      handleErrors('Informe a descrição do livro', 'descricao');
+      // console.log('Descrição em branco')
+    }
+    if (!inputs.capa) {
+      validate = false;
+      handleErrors('Informe a capa do livro', 'capa');
+      // console.log('Capa em branco')
+    }
+
+    console.log(errors);
+  };
+
+  return (
+    // SafeAreaView, uma div que colocaria os elementos dentro dele
+    <SafeAreaView style={estilos.safe}>
+      <ScrollView style={estilos.scroll}>
+        <Text style={estilos.textTitle}>Cadastro de Livro</Text>
+
+        <View style={estilos.viewForm}>
+          {/* Componente que criamos */}
+
+          {/*Os dados são passados para o onChange, que passa para a variavel 'TEXT'*/}
+          <Input
+            label="Título"
+            error={errors.titulo}
+            onFocus={() => {
+              // Tirando a mensagem de erro 
+              handleErrors(null, 'titulo');
+            }}
+            onChangeText={text => handleOnChange(text, 'titulo')}
+          />
+          <Input
+            label="Descrição"
+            error={errors.descricao}
+            onFocus={() => {
+              handleErrors(null, 'descricao');
+            }}
+            onChangeText={text => handleOnChange(text, 'descricao')}
+          />
+          <Input
+            label="Capa"
+            error={errors.capa}
+            onFocus={() => {
+              handleErrors(null, 'capa');
+            }}
+            onChangeText={text => handleOnChange(text, 'capa')}
+          />
+
+          <Button title="Cadastrar" onPress={validate} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
 const estilos = StyleSheet.create({
-  safe:{
-    backgroundColor:COLORS.white,
+  safe: {
+    backgroundColor: COLORS.white,
   },
-  scroll:{
+  scroll: {
     paddingTop: 50,
     paddingHorizontal: 20,
   },
-  textTitle:{
+  textTitle: {
     color: COLORS.blue,
     fontSize: 25,
-    fontWeight:"bold",
-    textAlign:"center",
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  viewForm:{
-    marginVertical:20,
+  viewForm: {
+    marginVertical: 20,
   },
-})
+});
 
 export default Cadastro;
