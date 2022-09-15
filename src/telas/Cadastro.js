@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import COLORS from '../const/Colors';
+import apiLivraria from '../service/apiLivraria';
 
 const Cadastro = () => {
   // const nome = "Tela de Cadastro";
@@ -67,9 +68,26 @@ const Cadastro = () => {
       handleErrors('Informe a capa do livro', 'capa');
       // console.log('Capa em branco')
     }
+    if (validate){
+      // Envia os dados para a API cadastrar.
+      cadastrar();
+      console.log('Cadastrou')
+    }
 
     console.log(errors);
   };
+
+  // Função que cria o cadastro com o post
+  const cadastrar = () => {
+    try{
+      const response = apiLivraria.post('/cadastrarLivros', 
+      {
+        titulo: inputs.titulo,
+        descricao: inputs.descricao,
+        imagem: inputs.capa,
+      })
+    }catch(error){}
+  }
 
   return (
     // SafeAreaView, uma div que colocaria os elementos dentro dele
@@ -83,6 +101,7 @@ const Cadastro = () => {
           {/*Os dados são passados para o onChange, que passa para a variavel 'TEXT'*/}
           <Input
             label="Título"
+            iconName='book-outline'
             error={errors.titulo}
             onFocus={() => {
               // Tirando a mensagem de erro 
@@ -92,6 +111,7 @@ const Cadastro = () => {
           />
           <Input
             label="Descrição"
+            iconName='card-text-outline'
             error={errors.descricao}
             onFocus={() => {
               handleErrors(null, 'descricao');
@@ -100,6 +120,7 @@ const Cadastro = () => {
           />
           <Input
             label="Capa"
+            iconName='image-outline'
             error={errors.capa}
             onFocus={() => {
               handleErrors(null, 'capa');
@@ -117,6 +138,8 @@ const Cadastro = () => {
 const estilos = StyleSheet.create({
   safe: {
     backgroundColor: COLORS.white,
+    borderTopStartRadius: 20, 
+    borderTopEndRadius: 20,
   },
   scroll: {
     paddingTop: 50,

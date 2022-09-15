@@ -4,6 +4,8 @@ import {Text, View, StyleSheet} from 'react-native';
 
 import Login from "./src/telas/Login";
 import Cadastro from "./src/telas/Cadastro";
+import Listagem from "./src/telas/Listagem";
+import COLORS from "./src/const/Colors";
 
 const App = ()=>{
 
@@ -17,12 +19,15 @@ const App = ()=>{
     // <View>
     //   <Text style={estilo.titulo}>{nome}</Text>
     // </View>
-    <View><Cadastro/></View>
+    <View><Listagem/></View>
   );
 }
 
 const estilo = StyleSheet.create({
-  container:{},
+  container:{
+    paddingTop: 100,
+    backgroundColor: COLORS.darkBlue,
+  },
   titulo: {
     width: "100%",
     backgroundColor :"#F00",
