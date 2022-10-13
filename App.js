@@ -1,44 +1,36 @@
 // O APP representa o ponto inicial da nossa aplicação
-import React from "react";
-import {Text, View, StyleSheet} from 'react-native';
+import React from 'react';
 
-import Login from "./src/telas/Login";
-import Cadastro from "./src/telas/Cadastro";
-import Listagem from "./src/telas/Listagem";
-import COLORS from "./src/const/Colors";
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const App = ()=>{
+const Stack = createNativeStackNavigator();
 
-  // const nome = "SENAI - Jandira"
+import Cadastro from './src/telas/Cadastro';
+import Listagem from './src/telas/Listagem';
+import Detalhes from './src/telas/Detalhes';
 
-  return(
-    // <View>
-    //   <Login style={estilo.titulo}></Login>
-    // </View>
+const App = () => {
 
-    // <View>
-    //   <Text style={estilo.titulo}>{nome}</Text>
-    // </View>
-    <View><Listagem/></View>
+  return (
+
+    <Detalhes/>
+    // <NavigationContainer>
+    //   <Stack.Navigator screenOptions={false}>
+    //     <Stack.Screen
+    //       name="Cadastro"
+    //       component={Cadastro}
+    //       options={{headerShown: false}}
+    //     />
+
+    //     <Stack.Screen
+    //       name="Listagem"
+    //       component={Listagem}
+    //       options={{headerShown: false}}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
-}
-
-const estilo = StyleSheet.create({
-  container:{
-    paddingTop: 100,
-    backgroundColor: COLORS.darkBlue,
-  },
-  titulo: {
-    width: "100%",
-    backgroundColor :"#F00",
-    textAlign: "center",
-    fontSize: 16,
-    lineHeight: 26,
-    color: "whitesmoke",
-    fontWeight: "bold",
-    padding: 16,
-    fontFamily: "Poppins",
-  },
-});
+};
 
 export default App;

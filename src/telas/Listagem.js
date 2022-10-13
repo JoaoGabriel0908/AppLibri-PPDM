@@ -6,6 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import COLORS from '../const/Colors';
@@ -27,10 +28,12 @@ const Listagem = () => {
     <ScrollView>
       <View style={estilos.container}>
         {livros.map(livro => (
-          <View style={estilos.post}>
-            <Image style={estilos.imagem} source={capaLivro150} />
-            <Text style={estilos.titulo}>{livro.titulo}</Text>
-          </View>
+          <TouchableOpacity key={livro.cod_livro} style={estilos.post} onPress={()=>{}}>
+            <View>
+              <Image style={estilos.imagem} source={capaLivro150} />
+              <Text style={estilos.titulo}>{livro.titulo}</Text>
+            </View>
+          </TouchableOpacity>
         ))}
 
         {/* Função com {} retorna um corpo de processamento */}
