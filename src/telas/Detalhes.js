@@ -28,13 +28,18 @@ const Detalhes = ({route, navigation}) => {
     });
   }, []);
 
+  // Função de exlusão de livroa
+  const excluir = () =>{
+    apiLivraria.delete(`/excluirLivros/${livro.cod_livro}`)
+    navigation.navigate('Listagem')
+  }
+
   return (
     <ScrollView>
       <View style={estilos.container}>
         <View style={estilos.post}>
           <Image style={estilos.imagem} source={capaLivro150} />
           <Text style={estilos.titulo}>{livro.titulo}</Text>
-          <Text style={estilos.titulo}>{livro.cod_livro}</Text>
           <Text style={estilos.descricao}>{livro.descricao}</Text>
         </View>
 
@@ -47,7 +52,7 @@ const Detalhes = ({route, navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={[estilos.botao, {backgroundColor: COLORS.darkBlue}]}
-            onPress={() => {}}>
+            onPress={() => {excluir()}}>
             <Text style={estilos.textoBotao}>Excluir</Text>
           </TouchableOpacity>
         </View>

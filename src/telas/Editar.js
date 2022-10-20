@@ -24,7 +24,7 @@ const Editar = ({route, navigation}) => {
       setInputs(data.data[0])
     }
     )
-  })
+  }, [])
 
   const {cod_livro} = route.params
 
@@ -80,7 +80,7 @@ const Editar = ({route, navigation}) => {
     }
     if (validate){
       // Envia os dados para a API cadastrar.
-      cadastrar();
+      editar();
       console.log('Cadastrou')
     }
 
@@ -88,14 +88,16 @@ const Editar = ({route, navigation}) => {
   };
 
   // Função que cria o cadastro com o post
-  const cadastrar = () => {
+  const editar = () => {
     try{
-      const response = apiLivraria.post('/cadastrarLivros', 
+      const response = apiLivraria.put('/alterarLivros', 
       {
         titulo: inputs.titulo,
         descricao: inputs.descricao,
         imagem: inputs.capa,
+        cod_livro: inputs.cod_livro
       })
+      navigation.goBack()
     }catch(error){}
   }
 
