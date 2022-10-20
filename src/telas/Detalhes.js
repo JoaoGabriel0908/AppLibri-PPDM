@@ -13,7 +13,6 @@ import capaLivro150 from '../assets/livros/lor150.png';
 import COLORS from '../const/Colors';
 
 const Detalhes = ({route, navigation}) => {
-
   // Pegando o valor do cod_livro
   const {cod_livro} = route.params;
   const [livro, setLivro] = useState({
@@ -35,15 +34,21 @@ const Detalhes = ({route, navigation}) => {
         <View style={estilos.post}>
           <Image style={estilos.imagem} source={capaLivro150} />
           <Text style={estilos.titulo}>{livro.titulo}</Text>
+          <Text style={estilos.titulo}>{livro.cod_livro}</Text>
           <Text style={estilos.descricao}>{livro.descricao}</Text>
         </View>
 
         <View style={estilos.botoes}>
-          <TouchableOpacity style={estilos.botao} onPress={() => {}}>
-              <Text style={[estilos.textoBotao, {backgroundColor: COLORS.darkBlue}]}>Editar</Text>
+          <TouchableOpacity style={estilos.botao} onPress={() => {navigation.navigate('Editar', {cod_livro:livro.cod_livro})}}>
+            <Text
+              style={[estilos.textoBotao, {backgroundColor: COLORS.darkBlue}]}>
+              Editar
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[estilos.botao, {backgroundColor: COLORS.darkBlue}]} onPress={() => {}}>
-              <Text style={estilos.textoBotao}>Excluir</Text>
+          <TouchableOpacity
+            style={[estilos.botao, {backgroundColor: COLORS.darkBlue}]}
+            onPress={() => {}}>
+            <Text style={estilos.textoBotao}>Excluir</Text>
           </TouchableOpacity>
         </View>
       </View>

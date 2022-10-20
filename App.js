@@ -11,6 +11,7 @@ import Cadastro from './src/telas/Cadastro';
 import Listagem from './src/telas/Listagem';
 import Detalhes from './src/telas/Detalhes';
 import Button from './src/components/Button';
+import Editar from './src/telas/Editar';
 
 // function HomeScreen({navigation}) {
 //   return (
@@ -54,6 +55,11 @@ const App = () => {
           name="Detalhes"
           component={Detalhes}
           options={{title: 'DETALHES'}}
+        />
+         <Stack.Screen
+          name="Editar"
+          component={Editar}
+          options={{title: 'EDIÇÃO DE LIVROS'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import COLORS from '../const/Colors';
 
 // Função que representa um componente
-const Input = ({label, iconName, error, onFocus = () => {}, ...props}) => {
+const Input = ({label, iconName, error, onFocus = () => {}, value, ...props}) => {
   return (
     <View style={estilos.formContainer}>
       <Text style={estilos.inputLabel}>{label}</Text>
@@ -19,6 +19,7 @@ const Input = ({label, iconName, error, onFocus = () => {}, ...props}) => {
           onFocus={() => {
             onFocus();
           }}
+          value={value}
           {...props}
         />
       </View>
