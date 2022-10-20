@@ -13,8 +13,10 @@ import COLORS from '../const/Colors';
 import apiLivraria from '../service/apiLivraria';
 import capaLivro150 from '../assets/livros/lor150.png';
 import capaLivro100 from '../assets/livros/lor100.png';
+import { useNavigation } from '@react-navigation/native';
 
 const Listagem = () => {
+  const navigation = useNavigation()
   const [livros, setLivros] = useState([]);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const Listagem = () => {
     <ScrollView>
       <View style={estilos.container}>
         {livros.map(livro => (
-          <TouchableOpacity key={livro.cod_livro} style={estilos.post} onPress={()=>{}}>
+          <TouchableOpacity key={livro.cod_livro} style={estilos.post} onPress={()=>navigation.navigate('Detalhes', {cod_livro:livro.cod_livro})}>
             <View>
               <Image style={estilos.imagem} source={capaLivro150} />
               <Text style={estilos.titulo}>{livro.titulo}</Text>

@@ -12,8 +12,10 @@ import apiLivraria from '../service/apiLivraria';
 import capaLivro150 from '../assets/livros/lor150.png';
 import COLORS from '../const/Colors';
 
-const Detalhes = () => {
-  const cod_livro = 1;
+const Detalhes = ({route, navigation}) => {
+
+  // Pegando o valor do cod_livro
+  const {cod_livro} = route.params;
   const [livro, setLivro] = useState({
     cod_livro: '',
     titulo: '',
