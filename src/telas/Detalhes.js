@@ -21,7 +21,7 @@ const Detalhes = ({route, navigation}) => {
     descricao: '',
     imagem: '',
   });
-
+ 
   useEffect(() => {
     apiLivraria.get(`/listarLivros/${cod_livro}`).then(livro => {
       setLivro(livro.data[0]);
